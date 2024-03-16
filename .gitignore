@@ -5,8 +5,9 @@ __pycache__/
 
 
 #personal_files
-*.txt
-*.json
+# Ignore .json and .txt files
+objects/*.json
+objects/*.txt
 
 
 # C extensions
