@@ -51,13 +51,24 @@ db = firestore.client()
 #dt = {'name':'ay', 'age':'92', 'status':'married', 'employed':'True'}
 #db.collection('dictionary').add(dt)
 
+# Read JSON data from file
 with open(JSON_FILE, 'rb') as f:
     json_data = json.load(f)
 
-
-# Upload data to Firestore
-collection_name = "WORD"  # Collection name
+# Upload data to Firestore with custom numeric IDs
+collection_name = "DICT"  # Collection name
+batch = db.batch()
+index = 1
 for data in json_data:
-    db.collection(collection_name).add(data)
+    doc_ref = db.collection(collection_name).document(str(index))
+    batch.set(doc_ref, data)
+    index += 1
+    if index % 500 == 0:  # Batch size for better performance
+        batch.commit()
+        batch = db.batch()
+
+# Commit any remaining batch
+if index % 500 != 0:
+    batch.commit()
 
 print("JSON data uploaded to Firestore successfully!")

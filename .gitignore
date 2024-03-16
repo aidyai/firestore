@@ -9,7 +9,6 @@ __pycache__/
 objects/*.json
 objects/*.txt
 
-*.txt
 
 # C extensions
 *.so
