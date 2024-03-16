@@ -5,8 +5,8 @@ __pycache__/
 
 
 #personal_files
-.txt
-.json
+*.txt
+*.json
 
 
 # C extensions
